@@ -1,10 +1,9 @@
 import Foundation
 import Observation
 
-@MainActor
 @Observable
 final class AuthManager {
-    static let shared = AuthManager()
+    nonisolated(unsafe) static let shared = AuthManager()
     
     var isAuthenticated = false
     var user: User?
