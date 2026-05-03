@@ -23,7 +23,7 @@ final class APIClient {
     
     // CHANGE THIS TO YOUR PRODUCTION BACKEND URL
     #if DEBUG
-    let baseURL = "http://localhost:8000"
+    let baseURL = "https://wealthflow-api-rz5w.onrender.com"
     #else
     let baseURL = "https://wealthflow-api-rz5w.onrender.com"
     #endif
