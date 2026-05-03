@@ -8,6 +8,9 @@ targets:
       - path: WealthFlow/Sources
         createIntermediateGroups: true
       - path: WealthFlow/Resources
+    scheme:
+      environmentVariables:
+        OS_ACTIVITY_MODE: disable
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.wealthflow.app
