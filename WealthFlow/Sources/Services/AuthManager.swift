@@ -3,7 +3,7 @@ import Observation
 
 @Observable
 final class AuthManager {
-    nonisolated(unsafe) static let shared = AuthManager()
+    static let shared = AuthManager()
     
     var isAuthenticated = false
     var user: User?

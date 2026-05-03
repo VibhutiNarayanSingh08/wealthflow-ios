@@ -19,7 +19,7 @@ enum APIError: Error, LocalizedError {
 
 @Observable
 final class APIClient {
-    nonisolated(unsafe) static let shared = APIClient()
+    static let shared = APIClient()
     
     // CHANGE THIS TO YOUR PRODUCTION BACKEND URL
     #if DEBUG
