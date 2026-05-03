@@ -96,7 +96,7 @@ struct ExpensesView: View {
                             Text("Transactions")
                                 .font(.title3.bold())
                             Spacer()
-                            Text(NumberFormatter.currency.string(from: NSNumber(value: viewModel.totalThisMonth)) ?? "₹0")
+                            Text(NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.totalThisMonth)) ?? "₹0")
                                 .font(.subheadline.bold())
                                 .foregroundStyle(.secondary)
                         }
@@ -136,8 +136,11 @@ struct ExpensesView: View {
             .sheet(isPresented: $showingAddExpense) {
                 AddExpenseSheet(viewModel: viewModel)
             }
-            .sheet(isPresented: $showingAddRecurring) {
-                AddRecurringSheet(viewModel: viewModel)
+            .overlay(alignment: .bottom) {
+                EmptyView()
+                    .sheet(isPresented: $showingAddRecurring) {
+                        AddRecurringSheet(viewModel: viewModel)
+                    }
             }
             .refreshable {
                 await viewModel.load()

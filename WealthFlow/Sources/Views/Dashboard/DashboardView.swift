@@ -12,25 +12,25 @@ struct DashboardView: View {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         SummaryCard(
                             title: "Net Worth",
-                            value: NumberFormatter.currency.string(from: NSNumber(value: viewModel.netWorth)) ?? "₹0",
+                            value: NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.netWorth)) ?? "₹0",
                             icon: "wallet.pass",
                             color: "#6366f1"
                         )
                         SummaryCard(
                             title: "Portfolio",
-                            value: NumberFormatter.currency.string(from: NSNumber(value: viewModel.totalPortfolioValue)) ?? "₹0",
+                            value: NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.totalPortfolioValue)) ?? "₹0",
                             icon: "chart.line.uptrend.xyaxis",
                             color: "#10b981"
                         )
                         SummaryCard(
                             title: "Monthly Expenses",
-                            value: NumberFormatter.currency.string(from: NSNumber(value: viewModel.monthlyExpenses)) ?? "₹0",
+                            value: NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.monthlyExpenses)) ?? "₹0",
                             icon: "creditcard",
                             color: "#f43f5e"
                         )
                         SummaryCard(
                             title: "Invested",
-                            value: NumberFormatter.currency.string(from: NSNumber(value: viewModel.totalInvested)) ?? "₹0",
+                            value: NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.totalInvested)) ?? "₹0",
                             icon: "banknote",
                             color: "#f59e0b"
                         )
@@ -69,7 +69,7 @@ struct DashboardView: View {
                                         Text(item.category.label)
                                             .font(.subheadline)
                                         Spacer()
-                                        Text(NumberFormatter.currency.string(from: NSNumber(value: item.amount)) ?? "₹0")
+                                        Text(NumberFormatter.currencyFormatter().string(from: NSNumber(value: item.amount)) ?? "₹0")
                                             .font(.subheadline.bold())
                                     }
                                     .padding()

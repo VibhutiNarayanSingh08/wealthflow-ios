@@ -95,14 +95,14 @@ struct BudgetCard: View {
                     
                     RoundedRectangle(cornerRadius: 4)
                         .fill(isOver ? Color.red : Color(hex: "#6366f1"))
-                        .frame(width: geo.size.width * CGFloat(percent / 100), height: 8)
+                        .frame(width: geo.size.width * CGFloat(min(max(percent, 0), 100) / 100), height: 8)
                         .animation(.easeInOut, value: percent)
                 }
             }
             .frame(height: 8)
             
             HStack {
-                Text("Spent: \(NumberFormatter.currency.string(from: NSNumber(value: spent)) ?? "₹0")")
+                Text("Spent: \(NumberFormatter.currencyFormatter().string(from: NSNumber(value: spent)) ?? "₹0")")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()

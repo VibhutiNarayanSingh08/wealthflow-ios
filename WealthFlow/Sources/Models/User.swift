@@ -6,6 +6,11 @@ struct User: Codable, Identifiable {
     let name: String?
     let createdAt: String?
     
+    enum CodingKeys: String, CodingKey {
+        case id, email, name
+        case createdAt = "created_at"
+    }
+    
     var displayName: String {
         name ?? email.components(separatedBy: "@").first ?? "User"
     }

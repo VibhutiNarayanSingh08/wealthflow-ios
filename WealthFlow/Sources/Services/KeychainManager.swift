@@ -15,18 +15,23 @@ final class KeychainManager {
     private let account = "authToken"
     
     func saveToken(_ token: String) throws {
-        let data = token.data(using: .utf8)!
+        guard let data = token.data(using: .utf8) else {
+            throw KeychainError.invalidStatus(errSecParam)
+        }
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
-            kSecValueData as String: data
+            kSecAttrAccount as String: account
         ]
         
         SecItemDelete(query as CFDictionary)
         
-        let status = SecItemAdd(query as CFDictionary, nil)
+        var addQuery = query
+        addQuery[kSecValueData as String] = data
+        addQuery[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+        
+        let status = SecItemAdd(addQuery as CFDictionary, nil)
         guard status == errSecSuccess else {
             throw KeychainError.invalidStatus(status)
         }

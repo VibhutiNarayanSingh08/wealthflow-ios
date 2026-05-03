@@ -19,16 +19,16 @@ struct Investment: Codable, Identifiable, Equatable {
     var isProfit: Bool { pnl >= 0 }
     
     var formattedAmount: String {
-        NumberFormatter.currency.string(from: NSNumber(value: currentValue)) ?? "₹0"
+        NumberFormatter.currencyFormatter().string(from: NSNumber(value: currentValue)) ?? "₹0"
     }
     
     var formattedInvested: String {
-        NumberFormatter.currency.string(from: NSNumber(value: invested)) ?? "₹0"
+        NumberFormatter.currencyFormatter().string(from: NSNumber(value: invested)) ?? "₹0"
     }
     
     var formattedPnl: String {
         let sign = pnl >= 0 ? "+" : ""
-        return sign + (NumberFormatter.currency.string(from: NSNumber(value: pnl)) ?? "₹0")
+        return sign + (NumberFormatter.currencyFormatter().string(from: NSNumber(value: pnl)) ?? "₹0")
     }
 }
 
@@ -52,11 +52,12 @@ func investmentTypeFor(_ id: String) -> InvestmentType {
 }
 
 extension NumberFormatter {
-    static let currency: NumberFormatter = {
+    static func currencyFormatter() -> NumberFormatter {
         let f = NumberFormatter()
         f.numberStyle = .currency
         f.currencyCode = "INR"
         f.maximumFractionDigits = 2
+        f.locale = Locale(identifier: "en_IN")
         return f
-    }()
+    }
 }

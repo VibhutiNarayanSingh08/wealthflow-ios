@@ -38,6 +38,6 @@ struct RecurringExpense: Codable, Identifiable, Equatable {
     }
     
     var formattedAmount: String {
-        NumberFormatter.currency.string(from: NSNumber(value: amount)) ?? "₹0"
+        NumberFormatter.currencyFormatter().string(from: NSNumber(value: amount)) ?? "₹0"
     }
 }

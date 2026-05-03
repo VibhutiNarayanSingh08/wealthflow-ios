@@ -6,11 +6,10 @@ struct Budget: Codable, Identifiable, Equatable {
     var limit: Double
     
     enum CodingKeys: String, CodingKey {
-        case id, category
-        case limit = "limit_amount"
+        case id, category, limit
     }
     
     var formattedLimit: String {
-        NumberFormatter.currency.string(from: NSNumber(value: limit)) ?? "₹0"
+        NumberFormatter.currencyFormatter().string(from: NSNumber(value: limit)) ?? "₹0"
     }
 }

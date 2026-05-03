@@ -14,7 +14,7 @@ struct InvestmentsView: View {
                             Text("Portfolio Value")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
-                            Text(NumberFormatter.currency.string(from: NSNumber(value: viewModel.totalCurrentValue)) ?? "₹0")
+                            Text(NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.totalCurrentValue)) ?? "₹0")
                                 .font(.title2.bold())
                         }
                         
@@ -24,7 +24,7 @@ struct InvestmentsView: View {
                             Text("P&L")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
-                            Text(viewModel.totalPnl >= 0 ? "+" + (NumberFormatter.currency.string(from: NSNumber(value: viewModel.totalPnl)) ?? "₹0") : NumberFormatter.currency.string(from: NSNumber(value: viewModel.totalPnl)) ?? "₹0")
+                            Text(viewModel.totalPnl >= 0 ? "+" + (NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.totalPnl)) ?? "₹0") : NumberFormatter.currencyFormatter().string(from: NSNumber(value: viewModel.totalPnl)) ?? "₹0")
                                 .font(.title2.bold())
                                 .foregroundStyle(viewModel.totalPnl >= 0 ? .green : .red)
                         }
@@ -50,7 +50,7 @@ struct InvestmentsView: View {
                                         Text(item.type.label)
                                             .font(.subheadline)
                                         Spacer()
-                                        Text(NumberFormatter.currency.string(from: NSNumber(value: item.value)) ?? "₹0")
+                                        Text(NumberFormatter.currencyFormatter().string(from: NSNumber(value: item.value)) ?? "₹0")
                                             .font(.subheadline)
                                         Text(String(format: "%.1f%%", item.percent))
                                             .font(.caption)
