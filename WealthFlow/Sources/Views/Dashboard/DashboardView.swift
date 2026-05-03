@@ -122,6 +122,19 @@ struct DashboardView: View {
                 .padding(.vertical)
             }
             .navigationTitle("Dashboard")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Button(role: .destructive) {
+                            authManager.logout()
+                        } label: {
+                            Label("Log Out", systemImage: "arrow.right.circle")
+                        }
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                    }
+                }
+            }
             .refreshable {
                 await viewModel.load()
             }
