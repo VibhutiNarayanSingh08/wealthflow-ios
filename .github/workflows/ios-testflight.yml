@@ -1,18 +1,21 @@
-name: Build & Deploy to TestFlight
+name: iOS Build & TestFlight
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
-  group: ios-testflight-${{ github.ref }}
+  group: ios-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build-debug:
+    name: Build Debug (No Signing)
     runs-on: macos-15
-    timeout-minutes: 30
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -24,13 +27,51 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Build Debug
+        run: |
+          xcodebuild build \
+            -project WealthFlow.xcodeproj \
+            -scheme WealthFlow \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            CODE_SIGNING_ALLOWED=NO
+
+  build-testflight:
+    name: Build & Deploy to TestFlight
+    runs-on: macos-15
+    timeout-minutes: 30
+    needs: build-debug
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install xcodegen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Check secrets exist
+        id: secrets
+        run: |
+          if [ -n "${{ secrets.APPLE_CERTIFICATE_BASE64 }}" ]; then
+            echo "has_certs=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_certs=false" >> $GITHUB_OUTPUT
+            echo "::warning::Apple certificates not configured. Skipping TestFlight upload."
+            echo "::warning::See TESTFLIGHT_SETUP.md for setup instructions."
+          fi
+
       - name: Install Apple certificate
+        if: steps.secrets.outputs.has_certs == 'true'
         uses: apple-actions/import-codesign-certs@v3
         with:
           p12-file-base64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
           p12-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
 
       - name: Download provisioning profile
+        if: steps.secrets.outputs.has_certs == 'true'
         uses: apple-actions/download-provisioning-profiles@v3
         with:
           bundle-id: com.wealthflow.app
@@ -40,6 +81,7 @@ jobs:
           api-private-key: ${{ secrets.APPLE_API_KEY_BASE64 }}
 
       - name: Build & Archive
+        if: steps.secrets.outputs.has_certs == 'true'
         run: |
           xcodebuild archive \
             -project WealthFlow.xcodeproj \
@@ -52,6 +94,7 @@ jobs:
             DEVELOPMENT_TEAM="${{ secrets.APPLE_TEAM_ID }}"
 
       - name: Export IPA
+        if: steps.secrets.outputs.has_certs == 'true'
         run: |
           cat > ExportOptions.plist << EOF
           <?xml version="1.0" encoding="UTF-8"?>
@@ -78,6 +121,7 @@ jobs:
             -exportOptionsPlist ExportOptions.plist
 
       - name: Upload to TestFlight
+        if: steps.secrets.outputs.has_certs == 'true'
         run: |
           echo "${{ secrets.APPLE_API_KEY_BASE64 }}" | base64 -d > AuthKey_${{ secrets.APPLE_API_KEY_ID }}.p8
           xcrun altool --upload-app \
