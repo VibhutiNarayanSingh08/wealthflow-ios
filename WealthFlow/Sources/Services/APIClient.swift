@@ -76,12 +76,28 @@ final class APIClient {
     
     func get<T: Decodable>(_ path: String) async throws -> T {
         let data = try await request(path: path)
-        return try JSONDecoder().decode(T.self, from: data)
+        do {
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+            print("[WealthFlow API] Decoding error for \(path): \(error)")
+            if let str = String(data: data, encoding: .utf8) {
+                print("[WealthFlow API] Response body: \(str)")
+            }
+            throw APIError.decodingError
+        }
     }
     
     func post<T: Decodable>(_ path: String, body: Encodable) async throws -> T {
         let data = try await request(path: path, method: "POST", body: body)
-        return try JSONDecoder().decode(T.self, from: data)
+        do {
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+            print("[WealthFlow API] Decoding error for \(path): \(error)")
+            if let str = String(data: data, encoding: .utf8) {
+                print("[WealthFlow API] Response body: \(str)")
+            }
+            throw APIError.decodingError
+        }
     }
     
     func post(_ path: String, body: Encodable) async throws {
