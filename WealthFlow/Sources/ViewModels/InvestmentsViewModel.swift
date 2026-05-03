@@ -36,6 +36,7 @@ final class InvestmentsViewModel {
     
     func load() async {
         isLoading = true
+        errorMessage = nil
         do {
             let data = try await APIClient.shared.getInvestments()
             await MainActor.run {
@@ -43,8 +44,10 @@ final class InvestmentsViewModel {
                 self.isLoading = false
             }
         } catch {
+            let errMsg = "Investments load failed: \(error.localizedDescription)"
+            print("[WealthFlow] \(errMsg)")
             await MainActor.run {
-                self.errorMessage = error.localizedDescription
+                self.errorMessage = errMsg
                 self.isLoading = false
             }
         }

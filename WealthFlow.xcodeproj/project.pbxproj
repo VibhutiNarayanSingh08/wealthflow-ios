@@ -31,6 +31,7 @@
 		D06EC9A191571D760634A1E8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036B8082F2819C0B5C17DB9 /* User.swift */; };
 		E1E9DD39CB6D8EF46761A6C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9ADF425F15AB0E64A610E75 /* Assets.xcassets */; };
 		E3E711A648A062ADBFD922C2 /* RecurringExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13501298CEC9371DED819130 /* RecurringExpense.swift */; };
+		E76BEA2D58BBEEBED61E9648 /* SeedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FB960A1C01DF5DB487A15 /* SeedDataService.swift */; };
 		FB973EC6912F68A9D310D26D /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEB319DF8FEE940D2BFC95C /* Color+Hex.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		0FC41CB12A0AA98AB7EA3366 /* BudgetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsViewModel.swift; sourceTree = "<group>"; };
 		13501298CEC9371DED819130 /* RecurringExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringExpense.swift; sourceTree = "<group>"; };
 		19BEC399C51783113DFDEDE2 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		1A8FB960A1C01DF5DB487A15 /* SeedDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedDataService.swift; sourceTree = "<group>"; };
 		24DC2D0C4B0D9859E07926D6 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		31583AB51B0446FD561433A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		32E901D8F6F1697CDD85CD7D /* ExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				EF8CAC8F48FA89F59710CF40 /* APIClient.swift */,
 				19BEC399C51783113DFDEDE2 /* AuthManager.swift */,
 				5D9CDE4FB6CBCF52F3FCB0E6 /* KeychainManager.swift */,
+				1A8FB960A1C01DF5DB487A15 /* SeedDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				3D9B1BEEF4BAC8EA0B70D322 /* LoginView.swift in Sources */,
 				5549171363A89D7FAD6976FA /* MainTabView.swift in Sources */,
 				E3E711A648A062ADBFD922C2 /* RecurringExpense.swift in Sources */,
+				E76BEA2D58BBEEBED61E9648 /* SeedDataService.swift in Sources */,
 				D06EC9A191571D760634A1E8 /* User.swift in Sources */,
 				05B6415D7C1947B4F75F72C9 /* WealthFlowApp.swift in Sources */,
 			);

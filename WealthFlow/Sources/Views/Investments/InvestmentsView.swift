@@ -8,6 +8,24 @@ struct InvestmentsView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    if let error = viewModel.errorMessage {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                            Text(error)
+                                .font(.caption)
+                            Spacer()
+                            Button("Dismiss") {
+                                viewModel.errorMessage = nil
+                            }
+                            .font(.caption.bold())
+                        }
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(Color.red.opacity(0.9))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding(.horizontal)
+                    }
+                    
                     // Summary
                     HStack(spacing: 16) {
                         VStack(alignment: .leading, spacing: 4) {
@@ -109,6 +127,14 @@ struct InvestmentsView: View {
                 .padding(.vertical)
             }
             .navigationTitle("Investments")
+            .overlay {
+                if viewModel.isLoading {
+                    ProgressView("Loading...")
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -174,6 +200,7 @@ struct AddInvestmentSheet: View {
     @State private var currentValue = ""
     @State private var date = Date()
     @State private var note = ""
+    @State private var errorMessage: String? = nil
     
     var body: some View {
         NavigationStack {
@@ -198,6 +225,11 @@ struct AddInvestmentSheet: View {
                     DatePicker("Date", selection: $date, displayedComponents: .date)
                     TextField("Note (optional)", text: $note)
                 }
+            }
+            .alert("Error", isPresented: .constant(errorMessage != nil)) {
+                Button("OK") { errorMessage = nil }
+            } message: {
+                Text(errorMessage ?? "")
             }
             .navigationTitle("Add Investment")
             .navigationBarTitleDisplayMode(.inline)
@@ -229,8 +261,15 @@ struct AddInvestmentSheet: View {
         )
         
         Task {
-            await viewModel.addInvestment(investment)
-            dismiss()
+            do {
+                try await APIClient.shared.createInvestment(investment)
+                await viewModel.load()
+                await MainActor.run { dismiss() }
+            } catch {
+                await MainActor.run {
+                    errorMessage = error.localizedDescription
+                }
+            }
         }
     }
 }

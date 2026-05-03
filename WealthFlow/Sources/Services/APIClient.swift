@@ -45,6 +45,7 @@ final class APIClient {
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        let hasToken = token != nil
         if let token = token {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
@@ -53,11 +54,17 @@ final class APIClient {
             request.httpBody = try JSONEncoder().encode(body)
         }
         
+        print("[WealthFlow API] \(method) \(baseURL)\(path) — token: \(hasToken)")
+        
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
+            print("[WealthFlow API] Invalid response for \(path)")
             throw APIError.invalidResponse
         }
+        
+        let bodyPreview = String(data: data, encoding: .utf8) ?? "<binary>"
+        print("[WealthFlow API] \(path) — HTTP \(httpResponse.statusCode), body: \(bodyPreview.prefix(500))")
         
         guard (200...299).contains(httpResponse.statusCode) else {
             let message = String(data: data, encoding: .utf8) ?? "Unknown error"

@@ -8,6 +8,24 @@ struct BudgetsView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    if let error = viewModel.errorMessage {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                            Text(error)
+                                .font(.caption)
+                            Spacer()
+                            Button("Dismiss") {
+                                viewModel.errorMessage = nil
+                            }
+                            .font(.caption.bold())
+                        }
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(Color.red.opacity(0.9))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding(.horizontal)
+                    }
+                    
                     if viewModel.budgets.isEmpty {
                         ContentUnavailableView {
                             Label("No budgets set", systemImage: "chart.pie")
@@ -30,6 +48,14 @@ struct BudgetsView: View {
                 .padding(.vertical)
             }
             .navigationTitle("Budgets")
+            .overlay {
+                if viewModel.isLoading {
+                    ProgressView("Loading...")
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -130,6 +156,7 @@ struct AddBudgetSheet: View {
     
     @State private var category = "food"
     @State private var limit = ""
+    @State private var errorMessage: String? = nil
     
     var body: some View {
         NavigationStack {
@@ -144,6 +171,11 @@ struct AddBudgetSheet: View {
                     TextField("Monthly Limit", text: $limit)
                         .keyboardType(.decimalPad)
                 }
+            }
+            .alert("Error", isPresented: .constant(errorMessage != nil)) {
+                Button("OK") { errorMessage = nil }
+            } message: {
+                Text(errorMessage ?? "")
             }
             .navigationTitle("Set Budget")
             .navigationBarTitleDisplayMode(.inline)
@@ -169,8 +201,15 @@ struct AddBudgetSheet: View {
         )
         
         Task {
-            await viewModel.addBudget(budget)
-            dismiss()
+            do {
+                try await APIClient.shared.createBudget(budget)
+                await viewModel.load()
+                await MainActor.run { dismiss() }
+            } catch {
+                await MainActor.run {
+                    errorMessage = error.localizedDescription
+                }
+            }
         }
     }
 }

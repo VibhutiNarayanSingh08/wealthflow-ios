@@ -3,11 +3,30 @@ import SwiftUI
 struct DashboardView: View {
     @State private var viewModel = DashboardViewModel()
     @State private var authManager = AuthManager.shared
+    @State private var isSeeding = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    if let error = viewModel.errorMessage {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                            Text(error)
+                                .font(.caption)
+                            Spacer()
+                            Button("Dismiss") {
+                                viewModel.errorMessage = nil
+                            }
+                            .font(.caption.bold())
+                        }
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(Color.red.opacity(0.9))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding(.horizontal)
+                    }
+                    
                     // Summary Cards
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         SummaryCard(
@@ -44,7 +63,26 @@ struct DashboardView: View {
                             .padding(.horizontal)
                         
                         if viewModel.recentExpenses.isEmpty {
-                            ContentUnavailableView("No transactions yet", systemImage: "doc.text")
+                            VStack(spacing: 12) {
+                                ContentUnavailableView("No transactions yet", systemImage: "doc.text")
+                                if viewModel.investments.isEmpty && viewModel.budgets.isEmpty && !viewModel.isLoading {
+                                    Button {
+                                        seedSampleData()
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "sparkles")
+                                            Text("Seed Sample Data")
+                                        }
+                                        .font(.subheadline.bold())
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 10)
+                                        .background(Color(hex: "#6366f1"))
+                                        .foregroundStyle(.white)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    }
+                                    .disabled(isSeeding)
+                                }
+                            }
                         } else {
                             LazyVStack(spacing: 8) {
                                 ForEach(viewModel.recentExpenses) { expense in
@@ -90,6 +128,27 @@ struct DashboardView: View {
             .task {
                 await viewModel.load()
             }
+            .overlay {
+                if viewModel.isLoading || isSeeding {
+                    ProgressView(isSeeding ? "Adding sample data..." : "Loading...")
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+            }
+        }
+    }
+    
+    private func seedSampleData() {
+        isSeeding = true
+        Task {
+            do {
+                try await SeedDataService.seed()
+                await viewModel.load()
+            } catch {
+                viewModel.errorMessage = "Failed to seed data: \(error.localizedDescription)"
+            }
+            isSeeding = false
         }
     }
 }

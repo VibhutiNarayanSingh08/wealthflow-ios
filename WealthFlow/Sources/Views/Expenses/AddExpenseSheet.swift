@@ -10,6 +10,7 @@ struct AddExpenseSheet: View {
     @State private var paymentMethod = "upi"
     @State private var note = ""
     @State private var date = Date()
+    @State private var errorMessage: String? = nil
     
     let paymentMethods = [
         ("upi", "📱 UPI"),
@@ -49,6 +50,11 @@ struct AddExpenseSheet: View {
                     TextField("Note (optional)", text: $note)
                 }
             }
+            .alert("Error", isPresented: .constant(errorMessage != nil)) {
+                Button("OK") { errorMessage = nil }
+            } message: {
+                Text(errorMessage ?? "")
+            }
             .navigationTitle("Add Expense")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -81,8 +87,15 @@ struct AddExpenseSheet: View {
         )
         
         Task {
-            await viewModel.addExpense(expense)
-            dismiss()
+            do {
+                try await APIClient.shared.createExpense(expense)
+                await viewModel.load()
+                await MainActor.run { dismiss() }
+            } catch {
+                await MainActor.run {
+                    errorMessage = error.localizedDescription
+                }
+            }
         }
     }
 }
@@ -96,6 +109,7 @@ struct AddRecurringSheet: View {
     @State private var category = "bills"
     @State private var dayOfMonth = 1
     @State private var frequency = "monthly"
+    @State private var errorMessage: String? = nil
     
     var body: some View {
         NavigationStack {
@@ -121,6 +135,11 @@ struct AddRecurringSheet: View {
                     
                     Stepper("Due day: \(dayOfMonth)", value: $dayOfMonth, in: 1...31)
                 }
+            }
+            .alert("Error", isPresented: .constant(errorMessage != nil)) {
+                Button("OK") { errorMessage = nil }
+            } message: {
+                Text(errorMessage ?? "")
             }
             .navigationTitle("Add Recurring")
             .navigationBarTitleDisplayMode(.inline)
@@ -153,8 +172,15 @@ struct AddRecurringSheet: View {
         )
         
         Task {
-            await viewModel.addRecurring(rec)
-            dismiss()
+            do {
+                try await APIClient.shared.createRecurring(rec)
+                await viewModel.load()
+                await MainActor.run { dismiss() }
+            } catch {
+                await MainActor.run {
+                    errorMessage = error.localizedDescription
+                }
+            }
         }
     }
 }

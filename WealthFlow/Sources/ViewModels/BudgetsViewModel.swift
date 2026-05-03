@@ -10,20 +10,32 @@ final class BudgetsViewModel {
     
     func load() async {
         isLoading = true
+        errorMessage = nil
+        var errors: [String] = []
+        
+        async let budTask: [Budget]? = fetchOrNil(APIClient.shared.getBudgets)
+        async let expTask: [Expense]? = fetchOrNil(APIClient.shared.getExpenses)
+        
+        let bud = await budTask
+        let exp = await expTask
+        
+        if let b = bud { budgets = b } else { errors.append("budgets") }
+        if let e = exp { expenses = e } else { errors.append("expenses") }
+        
+        if !errors.isEmpty {
+            errorMessage = "Failed to load: \(errors.joined(separator: ", ")). Pull to refresh."
+            print("[WealthFlow] Budgets partial load failure: \(errors.joined(separator: ", "))")
+        }
+        
+        isLoading = false
+    }
+    
+    private func fetchOrNil<T>(_ operation: @escaping () async throws -> T) async -> T? {
         do {
-            async let budgetsTask: [Budget] = APIClient.shared.getBudgets()
-            async let expensesTask: [Expense] = APIClient.shared.getExpenses()
-            let (b, e) = try await (budgetsTask, expensesTask)
-            await MainActor.run {
-                self.budgets = b
-                self.expenses = e
-                self.isLoading = false
-            }
+            return try await operation()
         } catch {
-            await MainActor.run {
-                self.errorMessage = error.localizedDescription
-                self.isLoading = false
-            }
+            print("[WealthFlow] Fetch error: \(error.localizedDescription)")
+            return nil
         }
     }
     

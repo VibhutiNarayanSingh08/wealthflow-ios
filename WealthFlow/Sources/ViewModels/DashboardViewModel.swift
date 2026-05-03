@@ -7,6 +7,7 @@ final class DashboardViewModel {
     var investments: [Investment] = []
     var budgets: [Budget] = []
     var isLoading = false
+    var errorMessage: String?
     
     var totalInvested: Double {
         investments.reduce(0) { $0 + $1.invested }
@@ -48,21 +49,35 @@ final class DashboardViewModel {
     
     func load() async {
         isLoading = true
+        errorMessage = nil
+        var errors: [String] = []
+        
+        async let expTask: [Expense]? = fetchOrNil(APIClient.shared.getExpenses)
+        async let invTask: [Investment]? = fetchOrNil(APIClient.shared.getInvestments)
+        async let budTask: [Budget]? = fetchOrNil(APIClient.shared.getBudgets)
+        
+        let exp = await expTask
+        let inv = await invTask
+        let bud = await budTask
+        
+        if let e = exp { expenses = e } else { errors.append("expenses") }
+        if let i = inv { investments = i } else { errors.append("investments") }
+        if let b = bud { budgets = b } else { errors.append("budgets") }
+        
+        if !errors.isEmpty {
+            errorMessage = "Failed to load: \(errors.joined(separator: ", ")). Pull to refresh."
+            print("[WealthFlow] Dashboard partial load failure: \(errors.joined(separator: ", "))")
+        }
+        
+        isLoading = false
+    }
+    
+    private func fetchOrNil<T>(_ operation: @escaping () async throws -> T) async -> T? {
         do {
-            async let exp: [Expense] = APIClient.shared.getExpenses()
-            async let inv: [Investment] = APIClient.shared.getInvestments()
-            async let bud: [Budget] = APIClient.shared.getBudgets()
-            let (e, i, b) = try await (exp, inv, bud)
-            await MainActor.run {
-                self.expenses = e
-                self.investments = i
-                self.budgets = b
-                self.isLoading = false
-            }
+            return try await operation()
         } catch {
-            await MainActor.run {
-                self.isLoading = false
-            }
+            print("[WealthFlow] Fetch error: \(error.localizedDescription)")
+            return nil
         }
     }
     

@@ -42,13 +42,22 @@ final class AuthManager {
     }
 
     func login(email: String, password: String) async {
+        validationTask?.cancel()
         await MainActor.run {
             isLoading = true
             errorMessage = nil
         }
         do {
             let response = try await APIClient.shared.login(email: email, password: password)
-            KeychainManager.shared.saveToken(response.token)
+            let saved = KeychainManager.shared.saveToken(response.token)
+            print("[WealthFlow] Token save result: \(saved)")
+            guard saved else {
+                await MainActor.run {
+                    self.errorMessage = "Failed to save login token. Please try again."
+                    self.isLoading = false
+                }
+                return
+            }
             await MainActor.run {
                 self.user = response.user
                 self.isAuthenticated = true
@@ -68,13 +77,22 @@ final class AuthManager {
     }
 
     func register(email: String, password: String, name: String) async {
+        validationTask?.cancel()
         await MainActor.run {
             isLoading = true
             errorMessage = nil
         }
         do {
             let response = try await APIClient.shared.register(email: email, password: password, name: name)
-            KeychainManager.shared.saveToken(response.token)
+            let saved = KeychainManager.shared.saveToken(response.token)
+            print("[WealthFlow] Token save result: \(saved)")
+            guard saved else {
+                await MainActor.run {
+                    self.errorMessage = "Failed to save registration token. Please try again."
+                    self.isLoading = false
+                }
+                return
+            }
             await MainActor.run {
                 self.user = response.user
                 self.isAuthenticated = true
@@ -95,7 +113,7 @@ final class AuthManager {
 
     func logout() {
         validationTask?.cancel()
-        KeychainManager.shared.deleteToken()
+        _ = KeychainManager.shared.deleteToken()
         user = nil
         isAuthenticated = false
         errorMessage = nil

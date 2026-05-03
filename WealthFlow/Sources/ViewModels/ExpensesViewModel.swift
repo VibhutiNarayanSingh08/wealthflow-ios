@@ -33,20 +33,32 @@ final class ExpensesViewModel {
     
     func load() async {
         isLoading = true
+        errorMessage = nil
+        var errors: [String] = []
+        
+        async let expTask: [Expense]? = fetchOrNil(APIClient.shared.getExpenses)
+        async let recTask: [RecurringExpense]? = fetchOrNil(APIClient.shared.getRecurring)
+        
+        let exp = await expTask
+        let rec = await recTask
+        
+        if let e = exp { expenses = e } else { errors.append("expenses") }
+        if let r = rec { recurring = r } else { errors.append("recurring") }
+        
+        if !errors.isEmpty {
+            errorMessage = "Failed to load: \(errors.joined(separator: ", ")). Pull to refresh."
+            print("[WealthFlow] Expenses partial load failure: \(errors.joined(separator: ", "))")
+        }
+        
+        isLoading = false
+    }
+    
+    private func fetchOrNil<T>(_ operation: @escaping () async throws -> T) async -> T? {
         do {
-            async let expensesTask: [Expense] = APIClient.shared.getExpenses()
-            async let recurringTask: [RecurringExpense] = APIClient.shared.getRecurring()
-            let (e, r) = try await (expensesTask, recurringTask)
-            await MainActor.run {
-                self.expenses = e
-                self.recurring = r
-                self.isLoading = false
-            }
+            return try await operation()
         } catch {
-            await MainActor.run {
-                self.errorMessage = error.localizedDescription
-                self.isLoading = false
-            }
+            print("[WealthFlow] Fetch error: \(error.localizedDescription)")
+            return nil
         }
     }
     

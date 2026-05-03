@@ -10,6 +10,24 @@ struct ExpensesView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    if let error = viewModel.errorMessage {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                            Text(error)
+                                .font(.caption)
+                            Spacer()
+                            Button("Dismiss") {
+                                viewModel.errorMessage = nil
+                            }
+                            .font(.caption.bold())
+                        }
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(Color.red.opacity(0.9))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding(.horizontal)
+                    }
+                    
                     // Quick Add Input
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Quick Add")
@@ -124,6 +142,14 @@ struct ExpensesView: View {
                 .padding(.vertical)
             }
             .navigationTitle("Expenses")
+            .overlay {
+                if viewModel.isLoading {
+                    ProgressView("Loading...")
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
