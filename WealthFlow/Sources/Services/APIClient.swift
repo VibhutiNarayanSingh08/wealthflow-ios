@@ -25,7 +25,7 @@ final class APIClient {
     #if DEBUG
     let baseURL = "http://localhost:8000"
     #else
-    let baseURL = "https://your-backend-url.onrender.com"
+    let baseURL = "https://wealthflow-api-rz5w.onrender.com"
     #endif
     
     private var token: String? {
