@@ -48,7 +48,7 @@ final class AuthManager {
         }
         do {
             let response = try await APIClient.shared.login(email: email, password: password)
-            try KeychainManager.shared.saveToken(response.token)
+            KeychainManager.shared.saveToken(response.token)
             await MainActor.run {
                 self.user = response.user
                 self.isAuthenticated = true
@@ -74,7 +74,7 @@ final class AuthManager {
         }
         do {
             let response = try await APIClient.shared.register(email: email, password: password, name: name)
-            try KeychainManager.shared.saveToken(response.token)
+            KeychainManager.shared.saveToken(response.token)
             await MainActor.run {
                 self.user = response.user
                 self.isAuthenticated = true
