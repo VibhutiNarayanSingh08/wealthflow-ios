@@ -13,14 +13,21 @@ final class BudgetsViewModel {
         errorMessage = nil
         var errors: [String] = []
         
+        if budgets.isEmpty, let cached = LocalCache.loadBudgets() {
+            budgets = cached
+        }
+        if expenses.isEmpty, let cached = LocalCache.loadExpenses() {
+            expenses = cached
+        }
+        
         async let budTask: [Budget]? = fetchOrNil(APIClient.shared.getBudgets)
         async let expTask: [Expense]? = fetchOrNil(APIClient.shared.getExpenses)
         
         let bud = await budTask
         let exp = await expTask
         
-        if let b = bud { budgets = b } else { errors.append("budgets") }
-        if let e = exp { expenses = e } else { errors.append("expenses") }
+        if let b = bud { budgets = b; LocalCache.saveBudgets(b) } else { errors.append("budgets") }
+        if let e = exp { expenses = e; LocalCache.saveExpenses(e) } else { errors.append("expenses") }
         
         if !errors.isEmpty {
             errorMessage = "Failed to load: \(errors.joined(separator: ", ")). Pull to refresh."
@@ -73,6 +80,7 @@ final class BudgetsViewModel {
             try await APIClient.shared.deleteBudget(id: id)
             await MainActor.run {
                 self.budgets.removeAll { $0.id == id }
+                LocalCache.saveBudgets(self.budgets)
             }
         } catch {
             await MainActor.run {

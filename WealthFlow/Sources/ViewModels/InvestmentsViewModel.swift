@@ -37,10 +37,16 @@ final class InvestmentsViewModel {
     func load() async {
         isLoading = true
         errorMessage = nil
+        
+        if investments.isEmpty, let cached = LocalCache.loadInvestments() {
+            investments = cached
+        }
+        
         do {
             let data = try await APIClient.shared.getInvestments()
             await MainActor.run {
                 self.investments = data
+                LocalCache.saveInvestments(data)
                 self.isLoading = false
             }
         } catch {
@@ -69,6 +75,7 @@ final class InvestmentsViewModel {
             try await APIClient.shared.deleteInvestment(id: id)
             await MainActor.run {
                 self.investments.removeAll { $0.id == id }
+                LocalCache.saveInvestments(self.investments)
             }
         } catch {
             await MainActor.run {

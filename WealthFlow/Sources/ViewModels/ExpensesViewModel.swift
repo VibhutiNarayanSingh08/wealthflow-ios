@@ -36,14 +36,21 @@ final class ExpensesViewModel {
         errorMessage = nil
         var errors: [String] = []
         
+        if expenses.isEmpty, let cached = LocalCache.loadExpenses() {
+            expenses = cached
+        }
+        if recurring.isEmpty, let cached = LocalCache.loadRecurring() {
+            recurring = cached
+        }
+        
         async let expTask: [Expense]? = fetchOrNil(APIClient.shared.getExpenses)
         async let recTask: [RecurringExpense]? = fetchOrNil(APIClient.shared.getRecurring)
         
         let exp = await expTask
         let rec = await recTask
         
-        if let e = exp { expenses = e } else { errors.append("expenses") }
-        if let r = rec { recurring = r } else { errors.append("recurring") }
+        if let e = exp { expenses = e; LocalCache.saveExpenses(e) } else { errors.append("expenses") }
+        if let r = rec { recurring = r; LocalCache.saveRecurring(r) } else { errors.append("recurring") }
         
         if !errors.isEmpty {
             errorMessage = "Failed to load: \(errors.joined(separator: ", ")). Pull to refresh."
@@ -78,6 +85,7 @@ final class ExpensesViewModel {
             try await APIClient.shared.deleteExpense(id: id)
             await MainActor.run {
                 self.expenses.removeAll { $0.id == id }
+                LocalCache.saveExpenses(self.expenses)
             }
         } catch {
             await MainActor.run {
@@ -113,6 +121,7 @@ final class ExpensesViewModel {
             try await APIClient.shared.deleteRecurring(id: id)
             await MainActor.run {
                 self.recurring.removeAll { $0.id == id }
+                LocalCache.saveRecurring(self.recurring)
             }
         } catch {
             await MainActor.run {
