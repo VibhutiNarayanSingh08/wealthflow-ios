@@ -9,7 +9,11 @@ struct BudgetsView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     if viewModel.budgets.isEmpty {
-                        ContentUnavailableView("No budgets set", systemImage: "chart.pie") {
+                        ContentUnavailableView {
+                            Label("No budgets set", systemImage: "chart.pie")
+                        } description: {
+                            Text("Set up your first budget to track spending")
+                        } actions: {
                             Button("Create Budget") {
                                 showingAddBudget = true
                             }
