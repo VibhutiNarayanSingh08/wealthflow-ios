@@ -7,7 +7,7 @@ enum KeychainError: Error {
     case invalidStatus(OSStatus)
 }
 
-final class KeychainManager {
+final class KeychainManager: Sendable {
     static let shared = KeychainManager()
     private init() {}
     
