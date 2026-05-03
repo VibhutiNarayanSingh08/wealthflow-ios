@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05B6415D7C1947B4F75F72C9 /* WealthFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB677FE7454273674BDDA673 /* WealthFlowApp.swift */; };
+		05F128E2AF8609534BAE50AD /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E19BAA15ABEBA9A95F5B6 /* Expense.swift */; };
+		1F9AD7D075D7F1029FEE70D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31583AB51B0446FD561433A8 /* ContentView.swift */; };
+		3D9B1BEEF4BAC8EA0B70D322 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057F1C58BF527EEF52613CF4 /* LoginView.swift */; };
+		4CBC74C5A633678494EAC9F2 /* ExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E901D8F6F1697CDD85CD7D /* ExpensesView.swift */; };
+		509A997ADF5B891DB1257902 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C9042BDDEEB3D05A88D037 /* DashboardViewModel.swift */; };
+		5549171363A89D7FAD6976FA /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC2D0C4B0D9859E07926D6 /* MainTabView.swift */; };
+		5A55D1A86D5449ED502ADD90 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8CAC8F48FA89F59710CF40 /* APIClient.swift */; };
+		6E80DECE678CF0870019F1C5 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EAB1A1B225AA4755438C7 /* DashboardView.swift */; };
+		7CF8DD88748CDE212E34BC80 /* BudgetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC41CB12A0AA98AB7EA3366 /* BudgetsViewModel.swift */; };
+		9EA018CC92918AC536337590 /* InvestmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90FA31FD91883EE7E82DE8 /* InvestmentsViewModel.swift */; };
+		9F36C74992F4B1E0EF51332B /* AddExpenseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F742C1080303A870580ED6F9 /* AddExpenseSheet.swift */; };
+		9F9C87625D78681B00A9FC07 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A09AE20350420CDD0BA532 /* ExpensesViewModel.swift */; };
+		A345C51A787F027CFC32AC80 /* Investment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EBF85CA221859B33AC821B /* Investment.swift */; };
+		A362DA3119FD8B9D4208A674 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C97B6EB402679D05407D74A /* Budget.swift */; };
+		A79BA62EE0DBD613685E600A /* InvestmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338BC9B7473F9BC332559C89 /* InvestmentsView.swift */; };
+		ADE9126EA484DEB79B1BB967 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BEC399C51783113DFDEDE2 /* AuthManager.swift */; };
+		AFD1AC8B4CA0228E4F203108 /* BudgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB317B93A2C861044241C9 /* BudgetsView.swift */; };
+		B743C40F1C7500FE11511171 /* ExpenseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8942429359BAF681A1F245 /* ExpenseRowView.swift */; };
+		C116CAFEF9C60AF7CCE2DDED /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9CDE4FB6CBCF52F3FCB0E6 /* KeychainManager.swift */; };
+		C824C373251A05395F6B8C63 /* FilterChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B31AE696E5B5B9E8FCBC237 /* FilterChip.swift */; };
+		D06EC9A191571D760634A1E8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036B8082F2819C0B5C17DB9 /* User.swift */; };
+		E1E9DD39CB6D8EF46761A6C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9ADF425F15AB0E64A610E75 /* Assets.xcassets */; };
+		E3E711A648A062ADBFD922C2 /* RecurringExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13501298CEC9371DED819130 /* RecurringExpense.swift */; };
+		FB973EC6912F68A9D310D26D /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEB319DF8FEE940D2BFC95C /* Color+Hex.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		057F1C58BF527EEF52613CF4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0FC41CB12A0AA98AB7EA3366 /* BudgetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsViewModel.swift; sourceTree = "<group>"; };
+		13501298CEC9371DED819130 /* RecurringExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringExpense.swift; sourceTree = "<group>"; };
+		19BEC399C51783113DFDEDE2 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		24DC2D0C4B0D9859E07926D6 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		31583AB51B0446FD561433A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		32E901D8F6F1697CDD85CD7D /* ExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesView.swift; sourceTree = "<group>"; };
+		338BC9B7473F9BC332559C89 /* InvestmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentsView.swift; sourceTree = "<group>"; };
+		41C9042BDDEEB3D05A88D037 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		57E176C062F3C10B7A187316 /* WealthFlow.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = WealthFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B31AE696E5B5B9E8FCBC237 /* FilterChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChip.swift; sourceTree = "<group>"; };
+		5D9CDE4FB6CBCF52F3FCB0E6 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		6C97B6EB402679D05407D74A /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
+		7F8942429359BAF681A1F245 /* ExpenseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRowView.swift; sourceTree = "<group>"; };
+		9E6E19BAA15ABEBA9A95F5B6 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		A0353901E8C4A91D5B2884B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A6A09AE20350420CDD0BA532 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
+		AABB317B93A2C861044241C9 /* BudgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsView.swift; sourceTree = "<group>"; };
+		BB677FE7454273674BDDA673 /* WealthFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WealthFlowApp.swift; sourceTree = "<group>"; };
+		C036B8082F2819C0B5C17DB9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C6EBF85CA221859B33AC821B /* Investment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Investment.swift; sourceTree = "<group>"; };
+		C9ADF425F15AB0E64A610E75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CAEB319DF8FEE940D2BFC95C /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		DA7EAB1A1B225AA4755438C7 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		EF8CAC8F48FA89F59710CF40 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		F742C1080303A870580ED6F9 /* AddExpenseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseSheet.swift; sourceTree = "<group>"; };
+		FE90FA31FD91883EE7E82DE8 /* InvestmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentsViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		008AF5343D329C560CDCFFBE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C9ADF425F15AB0E64A610E75 /* Assets.xcassets */,
+				A0353901E8C4A91D5B2884B6 /* Info.plist */,
+			);
+			name = Resources;
+			path = WealthFlow/Resources;
+			sourceTree = "<group>";
+		};
+		359F503F0C56494A9F93538A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CAC8F48FA89F59710CF40 /* APIClient.swift */,
+				19BEC399C51783113DFDEDE2 /* AuthManager.swift */,
+				5D9CDE4FB6CBCF52F3FCB0E6 /* KeychainManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		45D78A29CA9C7B14D40830FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6C97B6EB402679D05407D74A /* Budget.swift */,
+				9E6E19BAA15ABEBA9A95F5B6 /* Expense.swift */,
+				C6EBF85CA221859B33AC821B /* Investment.swift */,
+				13501298CEC9371DED819130 /* RecurringExpense.swift */,
+				C036B8082F2819C0B5C17DB9 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		53D27C473C2DB43979973481 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31583AB51B0446FD561433A8 /* ContentView.swift */,
+				24DC2D0C4B0D9859E07926D6 /* MainTabView.swift */,
+				83ED0E62D04F64BD80D0AC42 /* Auth */,
+				FAAA49EDFA6DA32A89895B6B /* Budgets */,
+				F2955E5FB278EFABD45EB0BD /* Components */,
+				F57CEABCF6272B8AF34629CD /* Dashboard */,
+				FD3024C78384D1C56DA258D3 /* Expenses */,
+				BA3BA3221EA7B6CFACCC2AD6 /* Investments */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		83ED0E62D04F64BD80D0AC42 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				057F1C58BF527EEF52613CF4 /* LoginView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		8A8B3699ABFFF22853040403 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				57E176C062F3C10B7A187316 /* WealthFlow.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A95A1893ECC5937B8C7413A3 = {
+			isa = PBXGroup;
+			children = (
+				008AF5343D329C560CDCFFBE /* Resources */,
+				C62E26813F0F71BC2224B248 /* WealthFlow */,
+				8A8B3699ABFFF22853040403 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BA3BA3221EA7B6CFACCC2AD6 /* Investments */ = {
+			isa = PBXGroup;
+			children = (
+				338BC9B7473F9BC332559C89 /* InvestmentsView.swift */,
+			);
+			path = Investments;
+			sourceTree = "<group>";
+		};
+		C62E26813F0F71BC2224B248 /* WealthFlow */ = {
+			isa = PBXGroup;
+			children = (
+				E15F903A8C9C69BF106E6219 /* Sources */,
+			);
+			path = WealthFlow;
+			sourceTree = "<group>";
+		};
+		DB9DDEB9EA0B21F7C6FCA270 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0FC41CB12A0AA98AB7EA3366 /* BudgetsViewModel.swift */,
+				41C9042BDDEEB3D05A88D037 /* DashboardViewModel.swift */,
+				A6A09AE20350420CDD0BA532 /* ExpensesViewModel.swift */,
+				FE90FA31FD91883EE7E82DE8 /* InvestmentsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E15F903A8C9C69BF106E6219 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				BB677FE7454273674BDDA673 /* WealthFlowApp.swift */,
+				45D78A29CA9C7B14D40830FE /* Models */,
+				359F503F0C56494A9F93538A /* Services */,
+				DB9DDEB9EA0B21F7C6FCA270 /* ViewModels */,
+				53D27C473C2DB43979973481 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		F2955E5FB278EFABD45EB0BD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CAEB319DF8FEE940D2BFC95C /* Color+Hex.swift */,
+				7F8942429359BAF681A1F245 /* ExpenseRowView.swift */,
+				5B31AE696E5B5B9E8FCBC237 /* FilterChip.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F57CEABCF6272B8AF34629CD /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				DA7EAB1A1B225AA4755438C7 /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		FAAA49EDFA6DA32A89895B6B /* Budgets */ = {
+			isa = PBXGroup;
+			children = (
+				AABB317B93A2C861044241C9 /* BudgetsView.swift */,
+			);
+			path = Budgets;
+			sourceTree = "<group>";
+		};
+		FD3024C78384D1C56DA258D3 /* Expenses */ = {
+			isa = PBXGroup;
+			children = (
+				F742C1080303A870580ED6F9 /* AddExpenseSheet.swift */,
+				32E901D8F6F1697CDD85CD7D /* ExpensesView.swift */,
+			);
+			path = Expenses;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		51E6DFBE4C2E5DC3D09BAB25 /* WealthFlow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26E9C34ACF7B277771B252E0 /* Build configuration list for PBXNativeTarget "WealthFlow" */;
+			buildPhases = (
+				742194A21CEDCF9AC89F67D2 /* Sources */,
+				B10F3C688B70652A685B1806 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WealthFlow;
+			packageProductDependencies = (
+			);
+			productName = WealthFlow;
+			productReference = 57E176C062F3C10B7A187316 /* WealthFlow.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B0E0A3CE3A52DD1C5D0E4F6B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = A4C6D991E22ED58EA28110C9 /* Build configuration list for PBXProject "WealthFlow" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A95A1893ECC5937B8C7413A3;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8A8B3699ABFFF22853040403 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				51E6DFBE4C2E5DC3D09BAB25 /* WealthFlow */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B10F3C688B70652A685B1806 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1E9DD39CB6D8EF46761A6C1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		742194A21CEDCF9AC89F67D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A55D1A86D5449ED502ADD90 /* APIClient.swift in Sources */,
+				9F36C74992F4B1E0EF51332B /* AddExpenseSheet.swift in Sources */,
+				ADE9126EA484DEB79B1BB967 /* AuthManager.swift in Sources */,
+				A362DA3119FD8B9D4208A674 /* Budget.swift in Sources */,
+				AFD1AC8B4CA0228E4F203108 /* BudgetsView.swift in Sources */,
+				7CF8DD88748CDE212E34BC80 /* BudgetsViewModel.swift in Sources */,
+				FB973EC6912F68A9D310D26D /* Color+Hex.swift in Sources */,
+				1F9AD7D075D7F1029FEE70D0 /* ContentView.swift in Sources */,
+				6E80DECE678CF0870019F1C5 /* DashboardView.swift in Sources */,
+				509A997ADF5B891DB1257902 /* DashboardViewModel.swift in Sources */,
+				05F128E2AF8609534BAE50AD /* Expense.swift in Sources */,
+				B743C40F1C7500FE11511171 /* ExpenseRowView.swift in Sources */,
+				4CBC74C5A633678494EAC9F2 /* ExpensesView.swift in Sources */,
+				9F9C87625D78681B00A9FC07 /* ExpensesViewModel.swift in Sources */,
+				C824C373251A05395F6B8C63 /* FilterChip.swift in Sources */,
+				A345C51A787F027CFC32AC80 /* Investment.swift in Sources */,
+				A79BA62EE0DBD613685E600A /* InvestmentsView.swift in Sources */,
+				9EA018CC92918AC536337590 /* InvestmentsViewModel.swift in Sources */,
+				C116CAFEF9C60AF7CCE2DDED /* KeychainManager.swift in Sources */,
+				3D9B1BEEF4BAC8EA0B70D322 /* LoginView.swift in Sources */,
+				5549171363A89D7FAD6976FA /* MainTabView.swift in Sources */,
+				E3E711A648A062ADBFD922C2 /* RecurringExpense.swift in Sources */,
+				D06EC9A191571D760634A1E8 /* User.swift in Sources */,
+				05B6415D7C1947B4F75F72C9 /* WealthFlowApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0D18DE21E4770E6742B88C28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		15FCC2844B9BEB5525501F5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		87FB9B60E6DDD71C01B5015A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				INFOPLIST_FILE = WealthFlow/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wealthflow.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BB26C382D3EA4C8BFF371868 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				INFOPLIST_FILE = WealthFlow/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wealthflow.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		26E9C34ACF7B277771B252E0 /* Build configuration list for PBXNativeTarget "WealthFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB26C382D3EA4C8BFF371868 /* Debug */,
+				87FB9B60E6DDD71C01B5015A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A4C6D991E22ED58EA28110C9 /* Build configuration list for PBXProject "WealthFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D18DE21E4770E6742B88C28 /* Debug */,
+				15FCC2844B9BEB5525501F5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B0E0A3CE3A52DD1C5D0E4F6B /* Project object */;
+}
